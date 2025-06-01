@@ -1,0 +1,110 @@
+/* ヘッダー */
+
+.main-header {
+    background: #000;
+    padding: 10px 20px;
+    color: white;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.logo {
+    height: 30px;
+}
+
+.search-form input[type="text"] {
+    width: 250px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: none;
+}
+
+.nav-links a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-sell {
+    background: white;
+    color: black;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+/* プロフィール設定 */
+.profile-container {
+    max-width: 500px;
+    margin: 80px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.profile-image-area {
+    margin-bottom: 30px;
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+
+.image-select-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: #fff0f0;
+    border: 1px solid #ff5c5c;
+    color: #ff5c5c;
+    font-size: 13px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
+
+.btn-red {
+    background-color: #ff5c5c;
+    color: white;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 20px;
+}
