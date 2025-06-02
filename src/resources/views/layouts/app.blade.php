@@ -28,7 +28,7 @@
                 @auth
                 <a href="{{ route('logout') }}"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>
-                <a href="{{ route('profile') }}">マイページ</a>
+                <a href="{{ route('mypage.sell') }}">マイページ</a>
                 <a href="{{ route('sell') }}" class="btn-sell">出品</a>
 
                 <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">

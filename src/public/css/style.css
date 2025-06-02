@@ -108,3 +108,348 @@
     cursor: pointer;
     margin-top: 20px;
 }
+
+/* トップ画面 */
+.tab-area {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    margin: 0 20px 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #999;
+    text-decoration: none;
+}
+
+.tab.active {
+    color: red;
+    font-weight: bold;
+    border-bottom: 2px solid red;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: flex-start;
+}
+
+.product-card {
+    width: 180px;
+    text-align: center;
+}
+
+.product-image {
+    width: 100%;
+    height: 180px;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #333;
+    border-radius: 4px;
+}
+
+.product-name {
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+/* マイページ */
+.mypage-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.mypage-profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.mypage-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #ccc;
+}
+
+.mypage-info h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.edit-profile-btn {
+    background-color: #fff0f0;
+    border: 1px solid #ff5c5c;
+    color: #ff5c5c;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.mypage-tabs {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #666;
+    text-decoration: none;
+}
+
+.tab.active {
+    color: red;
+    font-weight: bold;
+    border-bottom: 2px solid red;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.product-card {
+    width: 180px;
+    text-align: center;
+}
+
+.product-image {
+    width: 100%;
+    height: 180px;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #333;
+    border-radius: 4px;
+}
+
+.product-name {
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+/* 商品出品 */
+.sell-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.sell-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.upload-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px dashed #ccc;
+    background-color: #fff0f0;
+    border-radius: 4px;
+}
+
+.category-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    font-size: 13px;
+    padding: 5px 10px;
+    border: 1px solid #ff5c5c;
+    color: #ff5c5c;
+    border-radius: 20px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.tag input[type="checkbox"] {
+    display: none;
+}
+
+select,
+input[type="text"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.btn-red {
+    display: block;
+    width: 100%;
+    background-color: #ff5c5c;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+/* 商品詳細 */
+.product-detail-container {
+    display: flex;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.product-image-area {
+    flex: 1;
+}
+
+.product-image {
+    width: 100%;
+    height: 400px;
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.product-info-area {
+    flex: 1;
+    font-size: 14px;
+}
+
+.product-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.product-brand {
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.product-price span {
+    font-size: 14px;
+}
+
+.product-actions {
+    margin-bottom: 20px;
+}
+
+.icon-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.icon {
+    font-size: 18px;
+}
+
+.btn-red {
+    background-color: #ff5c5c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    display: inline-block;
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.product-description,
+.product-meta,
+.product-comments {
+    margin-top: 30px;
+}
+
+.tag {
+    display: inline-block;
+    background: #ffeaea;
+    border: 1px solid #ff5c5c;
+    color: #ff5c5c;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-right: 4px;
+}
+
+.comment-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-right: 10px;
+}
+
+.comment-body {
+    font-size: 14px;
+}
+
+.comment-text {
+    margin-top: 4px;
+}
+
+.comment-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.comment-form textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    resize: vertical;
+    margin-bottom: 10px;
+}
