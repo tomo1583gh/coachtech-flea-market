@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -19,16 +20,7 @@ class ProductController extends Controller
 
     public function show($item_id)
     {
-        // 仮データ（実際はDBから取得）
-        $product = (object)[
-            'name' => 'サンプル商品',
-            'brand' => 'ブランド名',
-            'price' => 47000,
-            'description' => '商品の説明文...',
-            'categories' => ['家電', 'メンズ'],
-            'condition' => '良好',
-        ];
-
+        $product = Product::with(['categories','comments.user'])->findOrFail($item_id);
         return view('product.show', compact('product'));
     }
 }

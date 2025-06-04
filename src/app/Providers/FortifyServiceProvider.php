@@ -37,6 +37,14 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
+        Fortify::redirects('login', function (Request $request) {
+            return '/'; // ログイン後は商品一覧へ
+        });
+
+        Fortify::redirects('register', function (Request $request) {
+            return RouteServiceProvider::HOME; // 会員登録後はHOMEへ
+        });
+
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 

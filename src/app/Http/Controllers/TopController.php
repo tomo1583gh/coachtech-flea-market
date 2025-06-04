@@ -10,7 +10,10 @@ class TopController extends Controller
 {
     public function index()
     {
-        $products = Product::all(); // おすすめ商品取得（仮）
+        //$products = Product::all(); // おすすめ商品取得（仮）
+
+        // 1ページ8件
+        $products = Product::paginate(8);
 
         return view('top', compact('products'));
     }

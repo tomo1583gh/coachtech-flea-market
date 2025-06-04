@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProfileController;
@@ -8,6 +7,9 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CommentController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,36 +22,36 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-// トップペｰジ(ログイン前向け)
-Route::get('/', function () {
-    return redirect('/login'); // 未ログインならログインへ
-});
+// トップページ　(商品一覧）　※ログイン不要
+Route::get('/', [TopController::class,'index'])->name('top');
+Route::get('/mylist', [TopController::class,'mylist'])->name('top.mylist');
 
+// 商品詳細画面　※ログイン不要
+Route::get('/item/{item_id}', [ProductController::class,'show'])->name('product.show');
+
+// コメント
+Route::post('/item/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
+
+// 検索機能
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 
-// Fortify認証後のHOMEに使う(RouteServiceProvider::HOMEに対応)
+// メール認証リンクからのアクセス処理
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill(); // 認証完了としてマークする
+    return redirect('/mypage/profile'); // 認証後のリダイレクト先（プロフィール設定）
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+// ログイン必須のページ
 Route::middleware(['auth', 'verified'])->group(function () {
+    // プロフィール
+    Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile');
+    Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-    // プロフィール画面
-    Route::get('/mypage/profile',[ProfileController::class, 'edit'])->name('profile');
-    Route::post('/mypage/profile',[ProfileController::class,'update'])->name('profile.update');
-
-    Route::get('/sell', function () {
-        return view('sell'); // resources/views/sell.blade.php を表示
-    })->name('sell');
-
-    // トップ画面
-    Route::get('/', [TopController::class,'index'])->name('top');
-    Route::get('/mylist', [TopController::class, 'mylist'])->name('top.mylist');
-
-    // マイページ画面
+    // マイページ(出品/購入)
     Route::get('/mypage', [MypageController::class, 'sell'])->name('mypage.sell');
-    Route::get('/mypage?page=buy',[MypageController::class, 'buy'])->name('mypage.buy');
+    Route::get('/mypage?page=buy', [MypageController::class, 'buy'])->name('mypage.buy');
 
-    // 商品出品画面
-    Route::get('/sell',[ProductController::class, 'create'])->name('sell');
-    Route::post('/sell', [ProductController::class, 'store'])->name('product.store');
-
-    // 商品詳細画面
-    Route::get('/item/{item_id}', [ProductController::class, 'show'])->name('product.show');
+    // 商品出品
+    Route::get('/sell', [ProductController::class, 'create'])->name('sell');
+    Route::post('/sell', [ProductController::class,'store'])->name('product.store');
 });

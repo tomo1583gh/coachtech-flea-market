@@ -6,7 +6,6 @@
 
     <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
         @csrf
-        @method('POST')
 
         <div class="profile-image-area">
             <img src="{{ asset('images/default-avatar.png') }}" class="profile-avatar" alt="プロフィール画像">
