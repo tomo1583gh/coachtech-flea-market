@@ -30,4 +30,10 @@ class Product extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function likedUsers()
+    {
+        return $this->belongsToMany(User::class, 'favorite_product')->withTimestamps();
+    }
+
 }

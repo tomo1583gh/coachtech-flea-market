@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Product;
+use App\Models\User;
 
 class ProductSeeder extends Seeder
 {
@@ -14,8 +15,11 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
+        $user = User::first();
+
         $products = [
             [
+                'user_id' => $user->id,
                 'name' => '腕時計',
                 'price' => 15000,
                 'description' => 'スタイリッシュなデザインのメンズ腕時計',
@@ -23,6 +27,7 @@ class ProductSeeder extends Seeder
                 'condition' => '良好',
             ],
             [
+                'user_id' => $user->id,
                 'name' => 'HDD',
                 'price' => 5000,
                 'description' => '高速で信頼性の高いハードディスク',
@@ -30,6 +35,7 @@ class ProductSeeder extends Seeder
                 'condition' => '目立った傷や汚れなし',
             ],
             [
+                'user_id' => $user->id,
                 'name' => '玉ねぎ3束',
                 'price' => 300,
                 'description' => '新鮮な玉ねぎ3束セット',
@@ -37,6 +43,7 @@ class ProductSeeder extends Seeder
                 'condition' => 'やや傷や汚れあり',
             ],
             [
+                'user_id' => $user->id,
                 'name' => '革靴',
                 'price' => 4000,
                 'description' => 'クラシックなデザインの革靴',
@@ -44,6 +51,7 @@ class ProductSeeder extends Seeder
                 'condition' => '状態が悪い',
             ],
             [
+                'user_id' => $user->id,
                 'name' => 'ノートPC',
                 'price' => 45000,
                 'description' => '高性能なノートパソコン',
@@ -51,6 +59,7 @@ class ProductSeeder extends Seeder
                 'condition' => '良好',
             ],
             [
+                'user_id' => $user->id,
                 'name' => 'マイク',
                 'price' => 8000,
                 'description' => '高音質のレコーディング用マイク',
@@ -58,6 +67,7 @@ class ProductSeeder extends Seeder
                 'condition' => '目立った傷や汚れなし',
             ],
             [
+                'user_id' => $user->id,
                 'name' => 'ショルダーバッグ',
                 'price' => 3500,
                 'description' => 'おしゃれなショルダーバッグ',
@@ -65,6 +75,7 @@ class ProductSeeder extends Seeder
                 'condition' => 'やや傷や汚れあり',
             ],
             [
+                'user_id' => $user->id,
                 'name' => 'タンブラー',
                 'price' => 500,
                 'description' => '使いやすいタンブラー',
@@ -72,6 +83,7 @@ class ProductSeeder extends Seeder
                 'condition' => '状態が悪い',
             ],
             [
+                'user_id' => $user->id,
                 'name' => 'コーヒーミル',
                 'price' => 4000,
                 'description' => '手動のコーヒーミル',
@@ -79,6 +91,7 @@ class ProductSeeder extends Seeder
                 'condition' => '良好',
             ],
             [
+                'user_id' => $user->id,
                 'name' => 'メイクセット',
                 'price' => 2500,
                 'description' => '便利なメイクアップセット',

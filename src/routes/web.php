@@ -8,6 +8,8 @@ use App\Http\Controllers\TopController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\PurchaseController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
@@ -22,18 +24,15 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 |
 */
 
-// トップページ　(商品一覧）　※ログイン不要
+// トップページ (商品一覧） ※ログイン不要
 Route::get('/', [TopController::class,'index'])->name('top');
 Route::get('/mylist', [TopController::class,'mylist'])->name('top.mylist');
 
-// 商品詳細画面　※ログイン不要
+// 商品詳細画面 ※ログイン不要
 Route::get('/item/{item_id}', [ProductController::class,'show'])->name('product.show');
 
 // コメント
 Route::post('/item/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
-
-// 検索機能
-Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 // メール認証リンクからのアクセス処理
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
@@ -49,9 +48,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // マイページ(出品/購入)
     Route::get('/mypage', [MypageController::class, 'sell'])->name('mypage.sell');
-    Route::get('/mypage?page=buy', [MypageController::class, 'buy'])->name('mypage.buy');
+    Route::get('/mypage?page=buy', [MypageController::class, 'sell'])->name('mypage.buy');
 
     // 商品出品
     Route::get('/sell', [ProductController::class, 'create'])->name('sell');
     Route::post('/sell', [ProductController::class,'store'])->name('product.store');
+
+    // 商品購入 (追加)
+    Route::get('/purchase/{item_id}', [PurchaseController::class, 'show'])->name('purchase.show');
+    Route::post('/purchase/{item_id}', [PurchaseController::class, 'store'])->name('purchase.complete');
+    Route::get('/purchase/address', [PurchaseController::class, 'editAddress'])->name('purchase.address.edit');
+    Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');
+
+    // 送付先住所変更ページ
+    Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'editAddress'])->name('purchase.address.edit');
+    Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');
+
+    // いいね機能
+    Route::post('/item/{item_id}/favorite', [FavoriteController::class, 'toggle'])->name('favorite.toggle');
 });

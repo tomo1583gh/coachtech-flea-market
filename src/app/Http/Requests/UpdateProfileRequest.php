@@ -25,7 +25,7 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'zipcode' => 'nullable|string|max:10',
+            'zip' => ['nullable', 'regex:/^\d{3}-\d{4}$/'], 
             'address' => 'nullable|string|max:255',
             'building' => 'nullable|string|max:255',
             'image' => 'nullable|image|max:2048',
@@ -36,6 +36,7 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             'name.required' => 'ユーザー名は必須です。',
+            'zip.regex' => '郵便番号は「123-4567」の形式で入力してください。',
             'image.image' => '画像ファイルを選択してください。',
             'image.max' => '画像サイズは2MB以内にしてください。',
 

@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -36,6 +40,27 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+
+        Fortify::authenticateUsing(function (Request $request) {
+            // バリデーション & 認証処理（↑）
+            Validator::make($request->all(), [
+                'email' => 'required|email',
+                'password' => 'required',
+            ], [
+                'email.required' => 'メールアドレスを入力してください。',
+                'email.email' => '正しい形式で入力してください。',
+                'password.required' => 'パスワードを入力してください。',
+            ])->validate();
+
+            // 通常の認証処理
+            $user = User::where('email', $request->email)->first();
+
+            if ($user && Hash::check($request->password, $user->password)) {
+                return $user;
+            }
+
+            return null;
+        });
 
         Fortify::redirects('login', function (Request $request) {
             return '/'; // ログイン後は商品一覧へ

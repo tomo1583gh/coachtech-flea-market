@@ -9,7 +9,8 @@ class ProfileController extends Controller
 {
     public function edit()
     {
-        return view('profile');
+        $user = auth()->user();
+        return view('profile', compact('user'));
     }
 
     public function update(Request $request)
@@ -19,14 +20,14 @@ class ProfileController extends Controller
 
         // 更新処理
         $user->name = $request->name;
-        $user->zipcode = $request->zipcode;
+        $user->zip = $request->zip;
         $user->address = $request->address;
         $user->building = $request->building;
 
-        //　画像処理
+        // 画像処理
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('avatars', 'public');
-            $user->image_path = 'storage/' . $path;
+            $user->image_path = $path;
         }
 
         $user->save();

@@ -17,11 +17,13 @@
     <header class="main-header">
         <div class="header-container">
             <div class="logo-area">
-                <img src="{{ asset('images/logo.svg') }}" class="logo" alt="ロゴ">
+                <a href="{{ route('top') }}">
+                    <img src="{{ asset('images/logo.svg') }}" class="logo" alt="ロゴ">
+                </a>
             </div>
 
-            <form action="{{ route('search') }}" method="GET" class="search-form">
-                <input type="text" name="keyword" placeholder="なにをお探しですか？">
+            <form action="{{ route('top') }}" method="GET" class="search-form">
+                <input type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
             </form>
 
             <nav class="nav-links">

@@ -21,7 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'zipcode',
+        'zip',
         'address',
         'building',
         'image_path'
@@ -45,4 +45,19 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function boughtProducts()
+    {
+        return $this->hasMany(Product::class, 'buyer_id');
+    }
+
+    public function soldProducts()
+    {
+        return $this->hasMany(Product::class, 'user_id');
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Product::class, 'favorite_product')->withTimestamps();
+    }
 }
