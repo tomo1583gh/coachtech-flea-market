@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\User;
 use App\Http\Requests\PurchaseRequest;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
+use Illuminate\Support\Facades\Config;
 
 class PurchaseController extends Controller
 {
@@ -51,5 +54,31 @@ class PurchaseController extends Controller
         $user->save();
 
         return redirect()->route('purchase.show', ['item_id' => $item_id])->with('success', '住所を変更しました。');
+    }
+
+    public function checkout(Request $request)
+    {
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        $product = Product::findOrFail($request->item_id);
+
+        $session = Session::create([
+            'payment_method_types' => ['card'], // コンビニは日本だと別オプション
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'jpy',
+                    'product_data' => [
+                        'name' => $product->name,
+                    ],
+                    'unit_amount' => $product->price, // 47000など（単位：円 → x100 = 4700000）
+                ],
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => route('checkout.success'), // 決済成功後のURL
+            'cancel_url' => route('checkout.cancel'),   // キャンセル時のURL
+        ]);
+
+        return redirect($session->url);
     }
 }

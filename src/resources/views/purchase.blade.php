@@ -36,11 +36,14 @@
             <p>支払い方法 <span id="summaryPayment">未選択</span></p>
         </div>
 
-        <form method="POST" action="{{ route('purchase.complete', ['item_id' => $product->id]) }}">
+        <form action="{{ route('checkout') }}" method="POST">
             @csrf
-            <input type="hidden" name="payment_method" id="selectedPaymentMethod">
-            <button type="submit" class="btn-purchase">購入する</button>
+            <input type="hidden" name="item_id" value="{{ $product->id }}">
+            <input type="hidden" name="price" value="{{ $product->price }}">
+            <!-- <input type="hidden" name="payment_method" value="コンビニ払い"> {{-- ←Stripe Checkoutでは一旦無視OK --}} -->
+            <button type="submit" class="btn-red">購入する</button>
         </form>
+
     </div>
 </div>
 

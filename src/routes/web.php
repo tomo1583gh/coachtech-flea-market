@@ -70,4 +70,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // いいね機能
     Route::post('/item/{item_id}/favorite', [FavoriteController::class, 'toggle'])->name('favorite.toggle');
+
+    // 購入API処理
+    Route::post('/checkout', [PurchaseController::class, 'checkout'])->name('checkout');
+
+    // 購入完了 ・ キャンセルページ
+    Route::get('/checkout/success', function () {
+        return '決済完了！';
+    })->name('checkout.success');
+
+    Route::get('/checkout/cancel', function () {
+        return 'キャンセルされました。';
+    })->name('checkout.cancel');
 });
