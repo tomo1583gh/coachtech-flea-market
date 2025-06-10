@@ -28,11 +28,12 @@ class CategorySeeder extends Seeder
             'ハンドメイド',
             'アクセサリー',
             'おもちゃ',
-            'ベビー・キッズ'
+            'ベビー・キッズ',
+            '食品'
         ];
 
         foreach ($categories as $name) {
-            category::create(['name' => $name]);
+            Category::create(['name' => $name]);
         }
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\User;
+use App\Http\Requests\PurchaseRequest;
 
 class PurchaseController extends Controller
 {
@@ -20,13 +21,13 @@ class PurchaseController extends Controller
     }
 
     // 購入処理
-    public function store(Request $request, $item_id)
+    public function store(PurchaseRequest $request, $item_id)
     {
         // 商品の取得
         $product = Product::findOrFail($item_id);
 
         // 購入処理：購入者IDを保存
-        $product->buyer_id = Auth::id();
+        $product->buyer_id = auth::id();
         $product->is_sold = true;
         $product->save();
 

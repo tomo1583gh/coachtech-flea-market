@@ -14,16 +14,19 @@
         </div>
 
         {{-- カテゴリー --}}
-        <div class="form-group">
-            <label>商品の詳細</label>
-            <div class="category-tags">
-                @foreach (['ファッション', '家電', 'インテリア', 'レジャー', 'ホビー', 'コスメ', '本', 'ゲーム', 'スポーツ', 'キッチン', 'ハンドメイド', 'アクセサリー', 'その他', 'ベビー・キッズ'] as $category)
-                <label class="tag">
-                    <input type="checkbox" name="categories[]" value="{{ $category }}"> {{ $category }}
-                </label>
-                @endforeach
-            </div>
+        <h3>カテゴリー</h3>
+        <div class="category-area">
+            @foreach ($categories as $category)
+            <label class="category-tag">
+                <input type="checkbox" name="categories[]" value="{{ $category->id }}"
+                    {{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
+                {{ $category->name }}
+            </label>
+            @endforeach
         </div>
+        @error('categories')
+        <p class="error">{{ $message }}</p>
+        @enderror
 
         {{-- 商品の状態 --}}
         <div class="form-group">

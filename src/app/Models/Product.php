@@ -21,6 +21,11 @@ class Product extends Model
 
     ];
 
+    protected $casts = [
+        'is_sold' => 'boolean',
+    ];
+
+
     public function categories()
     {
         return $this->belongsToMany(Category::class);

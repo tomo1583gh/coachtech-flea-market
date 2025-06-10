@@ -5,7 +5,7 @@
     {{-- 左：商品画像 --}}
     <div class="product-image-area">
         <div class="product-image-show">
-            <img src="{{ asset($product->image_path ?? 'image/no-image.png') }}" alt="{{ $product->name }}">
+            <img src="{{ asset($product->image_path ?? 'image/no-image.png') }}" alt="{{ $product->name }}" class="product-image-show">
         </div>
     </div>
 

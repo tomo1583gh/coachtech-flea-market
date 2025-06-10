@@ -60,4 +60,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Product::class, 'favorite_product')->withTimestamps();
     }
+
+    public function isProfileComplete(): bool
+    {
+        return !empty($this->name)
+            && !empty($this->zip)
+            && !empty($this->address)
+            && !empty($this->building);
+    }
 }

@@ -11,6 +11,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\PurchaseController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\RedirectController;
 
 
 /*
@@ -40,15 +41,18 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect('/mypage/profile'); // 認証後のリダイレクト先（プロフィール設定）
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
+// ログイン後リダイレクトの判定ルート
+Route::get('/redirect-after-login', RedirectController::class)
+    ->middleware(['auth', 'verified']);
+
 // ログイン必須のページ
 Route::middleware(['auth', 'verified'])->group(function () {
     // プロフィール
     Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile');
     Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-    // マイページ(出品/購入)
-    Route::get('/mypage', [MypageController::class, 'sell'])->name('mypage.sell');
-    Route::get('/mypage?page=buy', [MypageController::class, 'sell'])->name('mypage.buy');
+    // マイページ(出品・購入)共通ルート
+    Route::get('/mypage', [MypageController::class, 'index'])->name('mypage');
 
     // 商品出品
     Route::get('/sell', [ProductController::class, 'create'])->name('sell');

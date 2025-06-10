@@ -7,12 +7,15 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreProductRequest;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
     public function create()
     {
-        return view('sell');
+        $categories = Category::all();
+
+        return view('sell', compact('categories'));
     }
 
     public function store(StoreProductRequest $request)
