@@ -45,6 +45,13 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 Route::get('/redirect-after-login', RedirectController::class)
     ->middleware(['auth', 'verified']);
 
+// 購入完了 ・ キャンセルページ
+Route::get('/checkout/success', [PurchaseController::class, 'checkoutSuccess'])->name('checkout.success');
+
+Route::get('/checkout/cancel', function () {
+    return redirect()->route('top')->with('error', '決済がキャンセルされました');
+})->name('checkout.cancel');
+
 // ログイン必須のページ
 Route::middleware(['auth', 'verified'])->group(function () {
     // プロフィール
@@ -74,12 +81,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 購入API処理
     Route::post('/checkout', [PurchaseController::class, 'checkout'])->name('checkout');
 
-    // 購入完了 ・ キャンセルページ
-    Route::get('/checkout/success', function () {
-        return '決済完了！';
-    })->name('checkout.success');
-
-    Route::get('/checkout/cancel', function () {
-        return 'キャンセルされました。';
-    })->name('checkout.cancel');
 });

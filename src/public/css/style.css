@@ -112,17 +112,6 @@
     border-radius: 4px;
 }
 
-.btn-red {
-    background-color: #ff5c5c;
-    color: white;
-    padding: 12px 40px;
-    border: none;
-    border-radius: 4px;
-    font-size: 15px;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
 /* トップ画面 */
 .tab-area {
     display: flex;
@@ -430,19 +419,6 @@ textarea {
     resize: vertical;
 }
 
-.btn-red {
-    display: block;
-    width: 100%;
-    background-color: #ff5c5c;
-    color: white;
-    padding: 12px;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
 /* 商品詳細 */
 .product-detail-container {
     display: flex;
@@ -454,6 +430,7 @@ textarea {
 
 .product-image-area {
     flex: 1;
+    position: relative;
 }
 
 .product-image-show {
@@ -508,15 +485,17 @@ textarea {
 }
 
 .btn-red {
-    background-color: #ff5c5c;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
     display: inline-block;
+    background-color: #ff6f6f;
+    color: white;
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
     text-decoration: none;
-    margin-top: 10px;
-    font-size: 14px;
+    width: 100%;
 }
 
 .product-description,
@@ -581,6 +560,19 @@ textarea {
     color: #e60023;
     padding: 0;
     margin-right: 10px;
+}
+
+.sold-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: red;
+    color: white;
+    padding: 6px 12px;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 4px;
+    z-index: 10;
 }
 
 /* 購入画面 */

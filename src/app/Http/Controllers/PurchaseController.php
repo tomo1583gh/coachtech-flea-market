@@ -18,6 +18,13 @@ class PurchaseController extends Controller
     public function show($item_id)
     {
         $product = Product::findOrFail($item_id);
+
+        // SOLD商品は購入ページに進めないようにする
+        if ($product->is_sold) {
+            return redirect()->route('product.show', ['item_id' => $item_id])
+                            ->with('error', 'この商品はすでに売り切れています。');
+        }
+
         $user = Auth::user();
 
         return view('purchase',compact('product', 'user'));
@@ -62,6 +69,8 @@ class PurchaseController extends Controller
 
         $product = Product::findOrFail($request->item_id);
 
+        session()->put('purchase_product_id', $product->id);
+
         $session = Session::create([
             'payment_method_types' => ['card'], // コンビニは日本だと別オプション
             'line_items' => [[
@@ -80,5 +89,19 @@ class PurchaseController extends Controller
         ]);
 
         return redirect($session->url);
+    }
+
+    public function checkoutSuccess(Request $request)
+    {
+        $productId = session()->pull('purchase_product_id'); // セッションから取り出して削除
+        $product = Product::find($productId);
+
+        if ($product && !$product->is_sold) {
+            $product->buyer_id = Auth::id();
+            $product->is_sold = true;
+            $product->save();
+        }
+
+        return redirect()->route('top')->with('success', '購入が完了しました');
     }
 }

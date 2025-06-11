@@ -4,6 +4,10 @@
 <div class="product-detail-container">
     {{-- 左：商品画像 --}}
     <div class="product-image-area">
+        {{-- SOLDラベル --}}
+        @if ($product->is_sold)
+            <span class="sold-badge">SOLD</span>
+        @endif
         <div class="product-image-show">
             <img src="{{ asset($product->image_path ?? 'image/no-image.png') }}" alt="{{ $product->name }}" class="product-image-show">
         </div>
@@ -38,7 +42,9 @@
                 <span class="icon">💬</span> <span>{{ $product->comments_count ?? 0 }}</span>
             </div>
 
+            {{-- 購入ボタン --}}
             <a href="{{ route('purchase.show', ['item_id' => $product->id]) }}" class="btn-red">購入手続きへ</a>
+
         </div>
 
         <div class="product-description">
