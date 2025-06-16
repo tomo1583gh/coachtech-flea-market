@@ -10,7 +10,10 @@
         {{-- 商品画像 --}}
         <div class="form-group">
             <label for="image">商品画像</label>
-            <input type="file" name="image" id="image" class="upload-input">
+            <input type="file" name="image" id="image" class="upload-input" accept="image/*">
+            @error('image')
+            <p class="error">{{ $message }}</p>
+            @enderror
         </div>
 
         {{-- カテゴリー --}}

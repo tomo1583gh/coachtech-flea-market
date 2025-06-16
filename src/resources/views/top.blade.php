@@ -20,7 +20,7 @@
         <div class="sold-label">SOLD</div>
         @endif
 
-        <img src="{{ $product->image_path ?? asset('images/no-image.png') }}" class="product-image">
+        <img src="{{ $product->image_path ?? asset('images/no-image.png') }}" class="product-image" alt=" {{ $product->name }}">
         <div class="product-name">{{ $product->name }}</div>
         <div class="product-price">￥{{ number_format($product->price) }}</div>
     </a>
