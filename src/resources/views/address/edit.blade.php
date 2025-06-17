@@ -9,7 +9,7 @@
 
         <div class="form-group">
             <label for="zip">郵便番号</label>
-            <input type="text" id="zipcode" name="zipcode" value="{{ old('zip', $user->zip) }}">
+            <input type="text" id="zip" name="zip" value="{{ old('zip', $user->zip) }}">
             @if ($errors->has('zip'))
             <p class="error">{{ $errors->first('zip') }}</p>
             @endif
