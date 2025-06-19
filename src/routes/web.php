@@ -27,7 +27,6 @@ use App\Http\Controllers\RedirectController;
 
 // トップページ (商品一覧） ※ログイン不要
 Route::get('/', [TopController::class,'index'])->name('top');
-Route::get('/mylist', [TopController::class,'mylist'])->name('top.mylist');
 
 // 商品詳細画面 ※ログイン不要
 Route::get('/item/{item_id}', [ProductController::class,'show'])->name('product.show');

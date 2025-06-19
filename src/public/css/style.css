@@ -67,23 +67,6 @@ body {
     cursor: pointer;
 }
 
-@media screen and (max-width: 850px) and (min-width: 768px) {
-    .nav-links {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        width: 90%;
-        margin-top: 10px;
-    }
-
-    .nav-links a,
-    .nav-links form {
-        width: auto;
-        margin-right: 10px;
-        margin-top: 5px;
-    }
-}
-
 /* プロフィール設定 */
 .profile-container {
     max-width: 500px;

@@ -36,9 +36,13 @@ class Product extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function likedUsers()
+    public function favorites()
     {
         return $this->belongsToMany(User::class, 'favorite_product')->withTimestamps();
     }
 
+    public function likedUsers()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'product_id', 'user_id')->withTimestamps();
+    }
 }

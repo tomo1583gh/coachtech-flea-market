@@ -11,6 +11,26 @@ use App\Models\Category;
 
 class ProductController extends Controller
 {
+    public function index(Request $request)
+    {
+        if ($request->page === 'mylist') {
+            if (Auth::check()) {
+                // ログインしている場合のみ、マイリスト表示
+                $products = Auth::user()->favorites()->paginate(8);
+            } else {
+                // 未ログインは空を返す
+                $products = collect();
+            }
+        } else {
+            // 通常の商品一覧（出品者自身のもの以外、未購入）
+            $products = Product::where('user_id', '!=', Auth::id())
+                ->where('is_sold', false)
+                ->paginate(8);
+        }
+
+        return view('top', compact('products'));
+    }
+
     public function create()
     {
         $categories = Category::all();
@@ -41,9 +61,12 @@ class ProductController extends Controller
 
     public function show($item_id)
     {
-        $product = Product::with(['categories', 'comments.user'])
+        $product = Product::with(['categories', 'comments.user', 'likedUsers'])
             ->withCount(['comments'])
             ->findOrFail($item_id);
+
+        // コメントとユーザー情報をリロード
+        $product->load('comments.user');
 
         return view('product.show', compact('product'));
     }

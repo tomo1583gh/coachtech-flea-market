@@ -6,7 +6,7 @@
     <div class="product-image-area">
         {{-- SOLDラベル --}}
         @if ($product->is_sold)
-            <span class="sold-badge">SOLD</span>
+        <span class="sold-badge">SOLD</span>
         @endif
         <div class="product-image-show">
             <img src="{{ asset($product->image_path ?? 'image/no-image.png') }}" alt="{{ $product->name }}" class="product-image-show">
@@ -25,12 +25,8 @@
                 @auth
                 <form method="POST" action="{{ route('favorite.toggle', ['item_id' => $product->id]) }}" style="display:inline;">
                     @csrf
-                    <button type="submit" class="like-button">
-                        @if (auth()->user()->favorites->contains($product->id))
-                        ❤️
-                        @else
-                        🤍
-                        @endif
+                    <button type="submit" class="like-button {{ auth()->user()->favorites->contains($product->id) ? 'favorite' : '' }}">
+                        {{ auth()->user()->favorites->contains($product->id) ? '❤️' : '🤍' }}
                         {{ $product->likedUsers->count() }}
                     </button>
                 </form>
@@ -67,8 +63,8 @@
         </div>
 
         <div class="product-comments">
-            <h3>コメント ({{ count($product->comments ?? []) }})</h3>
-            @if (!empty($product->comments))
+            <h3>コメント ({{ $product->comments_count ?? 0}})</h3>
+            @if ($product->comments && $product->comments->isNotEmpty())
             @foreach ($product->comments as $comment)
             <div class="comment-item">
                 <div class="avatar"></div>

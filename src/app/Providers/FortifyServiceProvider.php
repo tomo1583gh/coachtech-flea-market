@@ -15,6 +15,8 @@ use Laravel\Fortify\Fortify;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Http\Requests\LoginRequest;
+use Illuminate\Validation\ValidationException;
 
 
 class FortifyServiceProvider extends ServiceProvider
@@ -42,15 +44,8 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
         Fortify::authenticateUsing(function (Request $request) {
-            // バリデーション & 認証処理（↑）
-            Validator::make($request->all(), [
-                'email' => 'required|email',
-                'password' => 'required',
-            ], [
-                'email.required' => 'メールアドレスを入力してください。',
-                'email.email' => '正しい形式で入力してください。',
-                'password.required' => 'パスワードを入力してください。',
-            ])->validate();
+
+            Validator::make($request->all(), (new LoginRequest)->rules(), (new LoginRequest)->messages())->validate();
 
             // 通常の認証処理
             $user = User::where('email', $request->email)->first();
@@ -59,7 +54,9 @@ class FortifyServiceProvider extends ServiceProvider
                 return $user;
             }
 
-            return null;
+            throw ValidationException::withMessages([
+                Fortify::username() => ['ログイン情報が登録されていません。'],
+            ]);
         });
 
         Fortify::redirects('login', function (Request $request) {
@@ -67,7 +64,7 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::redirects('register', function (Request $request) {
-            return RouteServiceProvider::HOME; // 会員登録後はHOMEへ
+            return '/register';
         });
 
         RateLimiter::for('login', function (Request $request) {
