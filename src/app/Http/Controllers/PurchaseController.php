@@ -37,11 +37,17 @@ class PurchaseController extends Controller
         $product = Product::findOrFail($item_id);
 
         // 購入処理：購入者IDを保存
-        $product->buyer_id = auth::id();
+        $product->buyer_id = Auth::id();
         $product->is_sold = true;
+
+        // ユーザーの住所情報を商品に保存
+        $product->zip = Auth::user()->zip;
+        $product->address = Auth::user()->address;
+        $product->building = Auth::user()->building;
+
         $product->save();
 
-        return redirect()->route('mypage.buy')->with('success', '購入が完了しました。');
+        return redirect()->route('mypage', ['page' => 'buy'])->with('success', '購入が完了しました。');
     }
 
     public function editAddress($item_id)
@@ -72,14 +78,14 @@ class PurchaseController extends Controller
         session()->put('purchase_product_id', $product->id);
 
         $session = Session::create([
-            'payment_method_types' => ['card'], // コンビニは日本だと別オプション
+            'payment_method_types' => ['card'],
             'line_items' => [[
                 'price_data' => [
                     'currency' => 'jpy',
                     'product_data' => [
                         'name' => $product->name,
                     ],
-                    'unit_amount' => $product->price, // 47000など（単位：円 → x100 = 4700000）
+                    'unit_amount' => $product->price,
                 ],
                 'quantity' => 1,
             ]],

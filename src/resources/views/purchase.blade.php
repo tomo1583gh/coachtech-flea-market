@@ -3,7 +3,7 @@
 @section('content')
 <div class="purchase-container">
     <div class="purchase-left">
-        <img src="{{ asset($product->image_path ?? 'image/no-image.png') }}" alt="{{ $product->name }}" class="product-image">
+        <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" class="product-image">
         <h2 class="product-name">{{ $product->name }}</h2>
         <p class="product-price">¥{{ number_format($product->price) }}</p>
 
@@ -12,7 +12,7 @@
         <label for="paymentMethod">支払い方法</label>
         <select id="paymentMethod" name="payment_method" class="payment-select">
             <option value="">選択してください</option>
-            <option value="convenience">コンビニ払い</option>
+            <option value="convenience">コンビニ支払い</option>
             <option value="card">カード支払い</option>
         </select>
 

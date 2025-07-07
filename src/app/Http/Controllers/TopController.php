@@ -13,12 +13,13 @@ class TopController extends Controller
 {
     public function index(Request $request)
     {
+        $userId = Auth::id();
+
         if ($request->page === 'mylist') {
             if (Auth::check()) {
                 $favoriteIds = Auth::user()->favorites()->pluck('products.id');
 
                 $products = Product::whereIn('id', $favoriteIds)
-                    ->where('user_id', '!=', Auth::id())
                     ->when($request->filled('keyword'), function ($query) use ($request) {
                         $query->where('name', 'like', '%' . $request->keyword . '%');
                     })
@@ -27,8 +28,9 @@ class TopController extends Controller
                 $products = collect();
             }
         } else {
-            $products = Product::where('user_id', '!=', Auth::id())
-                ->where('is_sold', false)
+            $products = Product::when($userId, function ($query) use ($userId) {
+                return $query->where('user_id', '!=', $userId);
+            })
                 ->when($request->filled('keyword'), function ($query) use ($request) {
                     $query->where('name', 'like', '%' . $request->keyword . '%');
                 })

@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('brand')->nullable();
             $table->text('description')->nullable();
             $table->unsignedInteger('price');
-            $table->string('condition')->nullable();
+            $table->unsignedTinyInteger('state')->nullable();
             $table->string('image_path')->nullable();
             $table->timestamps();
         });

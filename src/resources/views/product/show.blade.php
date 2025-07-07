@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+@php
+$stateLabels = [
+1 => '良好',
+2 => '目立った傷や汚れ無し',
+3 => 'やや傷や汚れあり',
+4 => '状態が悪い',
+];
+@endphp
 <div class="product-detail-container">
     {{-- 左：商品画像 --}}
     <div class="product-image-area">
@@ -8,8 +16,8 @@
         @if ($product->is_sold)
         <span class="sold-badge">SOLD</span>
         @endif
-        <div class="product-image-show">
-            <img src="{{ asset($product->image_path ?? 'image/no-image.png') }}" alt="{{ $product->name }}" class="product-image-show">
+        <div>
+            <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" class="product-image-show">
         </div>
     </div>
 
@@ -27,7 +35,7 @@
                     @csrf
                     <button type="submit" class="like-button {{ auth()->user()->favorites->contains($product->id) ? 'favorite' : '' }}">
                         {{ auth()->user()->favorites->contains($product->id) ? '❤️' : '🤍' }}
-                        {{ $product->likedUsers->count() }}
+                        <span>{{ optional($product->likedUsers)->count() ?? 0 }}</span>
                     </button>
                 </form>
                 @else
@@ -59,7 +67,7 @@
                 <span class="tag">未設定</span>
                 @endif
             </p>
-            <p>商品の状態：<span>{{ $product->condition ?? '未設定' }}</span></p>
+            <p>商品の状態：<span>{{ $stateLabels[$product->state] ?? '未設定' }}</span></p>
         </div>
 
         <div class="product-comments">

@@ -21,7 +21,7 @@
         <div class="category-area">
             @foreach ($categories as $category)
             <label class="category-tag">
-                <input type="checkbox" name="categories[]" value="{{ $category->id }}"
+                <input type="checkbox" name="category_id[]" value="{{ $category->id }}"
                     {{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
                 {{ $category->name }}
             </label>
@@ -33,8 +33,8 @@
 
         {{-- 商品の状態 --}}
         <div class="form-group">
-            <label for="condition">商品の状態</label>
-            <select name="condition" id="condition">
+            <label for="state">商品の状態</label>
+            <select name="state" id="state">
                 <option value="">選択してください</option>
                 <option value="新品・未使用">新品・未使用</option>
                 <option value="未使用に近い">未使用に近い</option>

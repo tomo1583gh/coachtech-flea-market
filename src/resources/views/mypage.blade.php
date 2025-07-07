@@ -25,20 +25,42 @@
         <p class="no-product-message">出品した商品はありません。</p>
         @endif
         @else
+        {{-- 出品商品一覧 --}}
+        @if (request('page') !== 'buy')
         @foreach ($products as $product)
+        @if ($product->user_id === Auth::id())
         <a href="{{ route('product.show', ['item_id' => $product->id]) }}" class="product-card">
             <div class="product-image-wrapper">
-                <img src="{{ asset($product->image_path ?? 'image/no-image.png') }}" alt="{{ $product->name }}" class="product-image">
-                @if ($product->is_sold === true || $product->is_sold === 1)
+                <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" class="product-image">
+
+                @if ($product->is_sold)
                 <div class="sold-label">SOLD</div>
                 @endif
             </div>
             <div class="product-name">{{ $product->name }}</div>
             <div class="product-price">￥{{ number_format($product->price) }}</div>
         </a>
+        @endif
+        @endforeach
+        @else
+        {{-- 購入商品一覧 --}}
+        @foreach ($products as $product)
+        @if ($product->buyer_id === Auth::id())
+        <a href="{{ route('product.show', ['item_id' => $product->id]) }}" class="product-card">
+            <div class="product-image-wrapper">
+                <img src="{{ Str::startsWith($product->image_path, 'http') ? $product->image_path : asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" class="product-image">
+
+                <div class="sold-label">SOLD</div>
+            </div>
+            <div class="product-name">{{ $product->name }}</div>
+            <div class="product-price">￥{{ number_format($product->price) }}</div>
+        </a>
+        @endif
         @endforeach
         @endif
+        @endif
     </div>
+
 
     <div class="pagination-wrapper">
         {{ $products->links() }}

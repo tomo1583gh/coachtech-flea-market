@@ -32,7 +32,9 @@ Route::get('/', [TopController::class,'index'])->name('top');
 Route::get('/item/{item_id}', [ProductController::class,'show'])->name('product.show');
 
 // コメント
-Route::post('/item/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
+Route::post('/item/{item_id}/comment', [CommentController::class, 'store'])
+->middleware('auth')
+->name('comment.store');
 
 // メール認証リンクからのアクセス処理
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {

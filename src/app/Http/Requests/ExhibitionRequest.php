@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
 
-class StoreProductRequest extends FormRequest
+class ExhibitionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,12 +27,12 @@ class StoreProductRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'brand' => 'nullable|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|integer|min:1',
-            'condition' => 'required|string',
-            'categories' => 'required|array|min1',
-            'categories.*' => 'exists:categories,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'required|string'|'max:255',
+            'price' => 'required|integer|min:0',
+            'state' => 'required|integer|in:1,2,3,4',
+            'category_ids' => 'required|array|min1',
+            'category_ids.*' => 'exists:categories,id',
+            'image' => 'required|image|mimes:jpeg,png,|max:2048',
         ];
     }
 
@@ -43,9 +43,9 @@ class StoreProductRequest extends FormRequest
             'description.required' => '商品説明を入力してください',
             'price.required' => '価格を入力してください',
             'price.integer' => '価格は整数で入力してください',
-            'condition.required' => '商品の状態を選択してください',
-            'categories.required' => 'カテゴリを1つ以上選択してください',
-            'categories.*.exists' => '無効なカテゴリが含まれています',
+            'state.required' => '商品の状態を選択してください',
+            'category_ids.required' => 'カテゴリを1つ以上選択してください',
+            'category_ids.*.exists' => '無効なカテゴリが含まれています',
             'image.required' => '商品画像を選択してください',
             'image.image' => '画像ファイルをアップロードしてください',
             'image.mimes' => '画像はjpeg, png, jpg, gif形式のみ対応しています',

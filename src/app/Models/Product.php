@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\Comment;
 
+
 class Product extends Model
 {
     use HasFactory;
@@ -16,13 +17,14 @@ class Product extends Model
         'brand',
         'description',
         'price',
-        'condition',
+        'state',
         'image_path',
 
     ];
 
     protected $casts = [
         'is_sold' => 'boolean',
+        'state' => 'integer',
     ];
 
 

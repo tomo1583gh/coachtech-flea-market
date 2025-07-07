@@ -14,7 +14,7 @@ class FavoriteController extends Controller
         $user = Auth::user();
         $product = Product::findOrFail($item_id);
 
-        if ($user->favorites()->where('product_id', $product->id)->exists()) {
+        if ($user->favorites->contains($product->id)) {
             $user->favorites()->detach($product->id);
         } else {
             $user->favorites()->attach($product->id);

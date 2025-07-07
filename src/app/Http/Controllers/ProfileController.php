@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
@@ -14,7 +14,7 @@ class ProfileController extends Controller
         return view('profile', compact('user'));
     }
 
-    public function update(UpdateProfileRequest $request)
+    public function update(ProfileRequest $request)
     {
         // ユーザー取得
         $user = auth()->user();
