@@ -14,18 +14,28 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if ($request->page === 'mylist') {
+
+            dd('ここ通ってる');
+
             if (Auth::check()) {
-                // ログインしている場合のみ、マイリスト表示
-                $products = Auth::user()->favorites()->paginate(8);
+                $favoriteIds = Auth::user()->favorites()->pluck('products.id');
+
+                $products = Product::whereIn('id', $favoriteIds)
+                    ->where('products.user_id', '!=', Auth::id()) // 自分の出品は除外
+                    ->paginate(8);
+
             } else {
-                // 未ログインは空を返す
-                $products = collect();
+                $products = collect(); // 未ログインは空
             }
         } else {
-            // 通常の商品一覧（出品者自身のもの以外、未購入）
-            $products = Product::where('user_id', '!=', Auth::id())
-                ->where('is_sold', false)
-                ->paginate(8);
+            $products = Product::query();
+
+            if (Auth::check()) {
+                $products->where('user_id', '!=', Auth::id()); // 自分の商品は除外
+            }
+
+            $products->where('is_sold', false);
+            $products = $products->paginate(8);
         }
 
         return view('top', compact('products'));
@@ -71,9 +81,15 @@ class ProductController extends Controller
             ->withCount(['comments'])
             ->findOrFail($item_id);
 
-        // コメントとユーザー情報をリロード
-        $product->load('comments.user');
+        // ここで再度ユーザーのお気に入り情報を読み込む
+        $isFavorited = false;
 
-        return view('product.show', compact('product'));
+        if (auth()->check()) {
+            // ここで DB から再取得した新鮮な情報を使うことが重要
+            $user = auth()->user()->load('favorites');
+            $isFavorited = $user->favorites->contains($product->id);
+        }
+
+        return view('product.show', compact('product', 'isFavorited'));
     }
 }

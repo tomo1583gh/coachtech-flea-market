@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TopController;
@@ -69,7 +68,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 商品購入 (追加)
     Route::get('/purchase/{item_id}', [PurchaseController::class, 'show'])->name('purchase.show');
     Route::post('/purchase/{item_id}', [PurchaseController::class, 'store'])->name('purchase.complete');
-    Route::get('/purchase/address', [PurchaseController::class, 'editAddress'])->name('purchase.address.edit');
     Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');
 
     // 送付先住所変更ページ

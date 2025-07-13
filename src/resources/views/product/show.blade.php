@@ -33,8 +33,8 @@ $stateLabels = [
                 @auth
                 <form method="POST" action="{{ route('favorite.toggle', ['item_id' => $product->id]) }}" style="display:inline;">
                     @csrf
-                    <button type="submit" class="like-button {{ auth()->user()->favorites->contains($product->id) ? 'favorite' : '' }}">
-                        {{ auth()->user()->favorites->contains($product->id) ? '❤️' : '🤍' }}
+                    <button type="submit" class="like-button {{ $isFavorited ? 'favorite' : '' }}">
+                        {{ $isFavorited ? '❤️' : '🤍' }}
                         <span>{{ optional($product->likedUsers)->count() ?? 0 }}</span>
                     </button>
                 </form>

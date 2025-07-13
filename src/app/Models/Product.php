@@ -45,6 +45,6 @@ class Product extends Model
 
     public function likedUsers()
     {
-        return $this->belongsToMany(User::class, 'favorites', 'product_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'favorite_product', 'product_id', 'user_id')->withTimestamps();
     }
 }

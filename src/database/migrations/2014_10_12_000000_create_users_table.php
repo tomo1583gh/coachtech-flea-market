@@ -19,6 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique(); // メールアドレス
             $table->timestamp('email_verified_at')->nullable(); // Fortify用
             $table->string('password'); // ハッシュ済みパスワード
+            $table->string('zip')->nullable(); // 郵便番号
+            $table->string('address')->nullable(); // 住所
+            $table->string('building')->nullable(); // 建物名
+            $table->string('image_path')->nullable(); // プロフィール画像のパス
             $table->rememberToken(); // 自動ログイン用トークン
             $table->timestamps(); // created_at, updated_at
         });
