@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
+use Illuminate\Validation\Rule;
 
 class ExhibitionRequest extends FormRequest
 {
@@ -29,7 +30,7 @@ class ExhibitionRequest extends FormRequest
             'brand' => ['nullable', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
             'price' => ['required', 'integer', 'min:0'],
-            'state' => ['required', 'integer', 'in:1,2,3,4'],
+            'state' => ['required', Rule::in(['new', 'like_new', 'good', 'fair', 'poor'])],
             'category_ids' => ['required', 'array', 'min:1'],
             'category_ids.*' => ['exists:categories,id'],
             'image' => ['required', 'image', 'mimes:jpeg,png', 'max:2048'],

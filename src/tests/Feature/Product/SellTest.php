@@ -49,7 +49,7 @@ class SellTest extends TestCase
             'name' => 'テスト商品',
             'description' => 'これはテスト用の商品です。',
             'price' => 3000,
-            'state' => 2,
+            'state' => 'good',
             'category_ids' => [$this->category1->id, $this->category2->id],
             'image' => UploadedFile::fake()->image('test.jpg'),
         ];
@@ -67,7 +67,7 @@ class SellTest extends TestCase
         $this->assertDatabaseHas('products', [
             'name' => 'テスト商品',
             'price' => 3000,
-            'state' => 2,
+            'state' => 'good',
             'user_id' => $this->user->id,
         ]);
 
