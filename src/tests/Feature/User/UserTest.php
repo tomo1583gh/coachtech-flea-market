@@ -21,6 +21,7 @@ class UserTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
+    private User $seller;
 
     protected function setUp(): void
     {
@@ -35,6 +36,12 @@ class UserTest extends TestCase
             'address' => '東京都港区芝公園',
             'building' => '芝タワー',
             'image_path' => 'profile_images/dummy.jpg',
+            'email_verified_at' => now(),
+        ]);
+
+        // 【準備】出品者ユーザーを作成
+        $this->seller = User::factory()->create([
+            'name' => '出品者ユーザー',
             'email_verified_at' => now(),
         ]);
 
@@ -54,21 +61,32 @@ class UserTest extends TestCase
 
         // 【準備】購入商品（is_sold=true, buyer_id指定）
         $product2 = Product::factory()->create([
-            'user_id' => User::factory()->create()->id,
+            'user_id' => $this->seller->id,
             'buyer_id' => $this->user->id,
             'is_sold' => true,
             'name' => '購入商品B',
         ]);
 
-        // 【実行】プロフィールページにアクセス
-        $response = $this->get('/mypage');
+        // 【実行1】プロフィールページ【出品商品一覧】にアクセス
+        $response = $this->get('/mypage?page=sell');
 
-        // 【検証】
+        // 【検証1】出品商品が表示されること
         $response->assertStatus(200);
         $response->assertSee('山田 太郎');
         $response->assertSee('出品商品A');
+        $response->assertDontSee('購入商品B');
+
+        // 【実行2】プロフィールページ【購入商品一覧】にアクセス
+        $response = $this->get('/mypage?page=buy');
+
+        // 【検証1】出品商品が表示されること
+        $response->assertStatus(200);
+        $response->assertSee('山田 太郎');
         $response->assertSee('購入商品B');
-        $response->assertSee('profile_images/dummy.jpg'); // パスが表示に含まれていること
+        $response->assertDontSee('出品商品A');
+
+        // 【共通】
+        $response->assertSee('profile_images/dummy.jpg');
     }
 
     /** @test */

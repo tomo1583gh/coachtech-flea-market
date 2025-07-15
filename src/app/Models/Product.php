@@ -19,6 +19,12 @@ class Product extends Model
         'price',
         'state',
         'image_path',
+        'user_id',
+        'buyer_id',
+        'zip',
+        'address',
+        'building',
+        'is_sold',
 
     ];
 

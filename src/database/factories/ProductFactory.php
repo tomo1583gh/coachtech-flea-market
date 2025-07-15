@@ -24,6 +24,10 @@ class ProductFactory extends Factory
             'user_id' => User::factory(),
             'is_sold' => false,
             'image_path' => 'default.jpg',
+            'buyer_id' => null,
+            'zip' => null,
+            'address' => null,
+            'building' => null,
         ];
     }
 }

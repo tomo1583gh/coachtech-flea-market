@@ -42,13 +42,13 @@
         </a>
         @endif
         @endforeach
-        @else
-        @if ($page === 'buy')
+        @elseif ($page === 'buy')
         {{-- 購入商品一覧 --}}
         @foreach ($products as $product)
+        @if ($product->buyer_id === Auth::id())
         <a href="{{ route('product.show', ['item_id' => $product->id]) }}" class="product-card">
             <div class="product-image-wrapper">
-                <img src="{{ Str::startsWith($product->image_path, 'http') ? $product->image_path : asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" class="product-image">
+                <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" class="product-image">
 
                 <div class="sold-label">SOLD</div>
             </div>
@@ -57,6 +57,8 @@
         </a>
         @endif
         @endforeach
+        @endif
+        @endif
     </div>
 
 
