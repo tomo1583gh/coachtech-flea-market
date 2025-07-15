@@ -15,8 +15,6 @@ class ProductController extends Controller
     {
         if ($request->page === 'mylist') {
 
-            dd('ここ通ってる');
-
             if (Auth::check()) {
                 $favoriteIds = Auth::user()->favorites()->pluck('products.id');
 
@@ -61,8 +59,8 @@ class ProductController extends Controller
         // 画像の保存処理
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $image_Path = $request->file('image')->store('products', 'public');
-            $product->image_path = $image_Path;
+            $imagePath = $request->file('image')->store('products', 'public');
+            $product->image_path = $imagePath;
         }
 
         $product->save();

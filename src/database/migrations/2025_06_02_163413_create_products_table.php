@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->unsignedInteger('price');
             $table->boolean('is_sold')->default(false);
-            $table->unsignedTinyInteger('state')->nullable();
+            $table->string('state')->nullable();
             $table->string('image_path')->nullable();
             $table->string('zip')->nullable();
             $table->string('address')->nullable();
