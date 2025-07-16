@@ -22,4 +22,6 @@ yarn-error.log
 /storage/
 # ただし、storage/app/public はGitに含める(storage：link 用）
 !storage/app/public
-!/storage/app/public/**
+!/storage/app/public/avatars/*.png
+!/storage/app/public/products/*.png
+!/storage/app/public/products/*.jpg

@@ -33,7 +33,7 @@ class ExhibitionRequest extends FormRequest
             'state' => ['required', Rule::in(['new', 'like_new', 'good', 'fair', 'poor'])],
             'category_ids' => ['required', 'array', 'min:1'],
             'category_ids.*' => ['exists:categories,id'],
-            'image' => ['required', 'image', 'mimes:jpeg,png', 'max:2048'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ];
     }
 
@@ -49,7 +49,7 @@ class ExhibitionRequest extends FormRequest
             'category_ids.*.exists' => '無効なカテゴリが含まれています',
             'image.required' => '商品画像を選択してください',
             'image.image' => '画像ファイルをアップロードしてください',
-            'image.mimes' => '画像はjpeg, png, 形式のみ対応しています',
+            'image.mimes' => '画像はjpeg, png, jpg形式のみ対応しています',
             'image.max' => '画像サイズは2MB以内にしてください',
         ];
     }

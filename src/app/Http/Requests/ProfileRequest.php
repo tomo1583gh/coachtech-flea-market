@@ -28,7 +28,7 @@ class ProfileRequest extends FormRequest
             'zip' => ['nullable', 'regex:/^\d{3}-\d{4}$/'],
             'address' => ['nullable', 'string', 'max:255'],
             'building' => ['nullable', 'string', 'max:255'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png', 'max:2048'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ];
     }
 
@@ -40,7 +40,7 @@ class ProfileRequest extends FormRequest
             'zip.regex' => '郵便番号はXXX-XXXXの形式で入力してください。',
 
             'image.image' => '画像ファイルを選択してください。',
-            'image.mimes' => '画像はjpegまたはpng形式でアップロードしてください。',
+            'image.mimes' => '画像はjpegまたはpng,jpg形式でアップロードしてください。',
             'image.max' => '画像サイズは2MB以内にしてください。',
 
         ];
