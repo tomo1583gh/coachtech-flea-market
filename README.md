@@ -1,6 +1,6 @@
 # 「coachtechフリマ」
 
-このアプリはテスト課題としてLaravel 8で開発したフリマアプリです。10～30代の社会人をターゲットとし、PCでの使用を前提とし開発しました。  
+このアプリはテスト課題としてLaravel 8で開発したフリマアプリです。  10～30代の社会人をターゲットとし、PCでの使用を想定して開発しました。
 
 ## 実装済み機能一覧
 
@@ -14,55 +14,60 @@
 - 管理機能（バリデーション・テストコード）
 
 
-## dockerビルド
+## dockerビルド手順
 
-1. リポジトリのクローン  
+1. リポジトリのクローン
 
-    git clone git@github.com:tomo1583gh/coachtech-flea-market.git  
+    `git clone git@github.com:tomo1583gh/coachtech-flea-market.git`
 
-2. Dockerコンテナのビルド・起動  
+2. Dockerコンテナのビルド・起動
 
-    docker-compose up -d --build  
+    `docker-compose up -d --build`
 
-    ※  Mysqlは、OSによって起動しない場合があるのでそれぞれのPCに合わせてdocker-compose.ymlファイルを編集して下さい。
+    ※  MySQLは、OSによって起動しない場合があるのでそれぞれのPCに合わせてdocker-compose.ymlファイルを編集して下さい。
 
-## laravel環境構築
+## laravel　環境構築
 
 1. PHPコンテナに入る
 
-    docker-compose exec php bash
+    `docker-compose exec php bash`
 
 2. Composerで依存パッケージをインストール
 
-    composer install
+    `composer install`
 
-3. .env.exampleファイルをコピーして.envファイルを作成し環境変数を変更
+3. .envファイルを作成
+
+    `cp .env.example .env`
+
+    必要に応じて環境変数を編集
 
 4. アプリケーションキーを生成
 
-    php artisan key:generate
+    `php artisan key:generate`
 
 5. マイグレーションを実行
 
-    php artisan migrate
+    `php artisan migrate`
 
 6. 初期データを投入
 
-    php artisan db:seed
+    `php artisan db:seed`
 
 7. シンボリックリンクの作成
 
-    php artisan storage:link
+    `php artisan storage:link`
 
 8. Mailhog起動（別途インストール必要）
 
-    環境変数を変更後http://localhost:8025 でメール確認可能
+    http://localhost:8025 にアクセスし、送信メールを確認出来ます
+    `.env`のMAIL_HOST=mailhogを設定してください
 
-9. StripeのSTRIPE_KEY(公開鍵)とSTRIPE_SECRET（秘密鍵）を.envファイルに設定
+9. Stripeの公開鍵と秘密鍵を`.env`に設定
 
 10. アプリ起動
 
-    php artisan serve
+    `php artisan serve`
 
 ## 使用技術
 

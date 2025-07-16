@@ -1,27 +1,23 @@
+# Laravel関係の除外設定
+/vendor
 /node_modules
-/public/hot
 /public/storage
 /storage/*.key
-/vendor
 .env
 .env.backup
 .env.testing
 .phpunit.result.cache
-
 docker-compose.override.yml
 Homestead.json
 Homestead.yaml
-
 npm-debug.log
 yarn-error.log
-
 /.idea
 /.vscode
 
-# ストレージ全体を無視
+# storage ディレクトリ全体を無視
 /storage/
-# ただし、storage/app/public はGitに含める(storage：link 用）
-!storage/app/public
-!/storage/app/public/avatars/*.png
-!/storage/app/public/products/*.png
-!/storage/app/public/products/*.jpg
+
+# ただし public 配下は Git に含める
+!storage/app/public/
+!storage/app/public/**
