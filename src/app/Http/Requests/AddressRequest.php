@@ -24,7 +24,6 @@ class AddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
             'zip' => ['required', 'regex:/^\d{3}-\d{4}$/'],
             'address' => ['required', 'string', 'max:255'],
             'building' => ['nullable', 'string', 'max:255'],
@@ -34,8 +33,6 @@ class AddressRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'お名前を入力してください',
-
             'zip.required' => '郵便番号を入力してください。',
             'zip.regex' => '郵便番号はXXX-XXXXの形式で入力してください。',
 

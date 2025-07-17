@@ -12,7 +12,7 @@
             <input type="text" id="zip" name="zip" value="{{ old('zip', $user->zip) }}">
             @error('zip')
             <p class="error">{{ $message }}</p>
-            @endif
+            @enderror
         </div>
 
         <div class="form-group">
@@ -20,7 +20,7 @@
             <input type="text" id="address" name="address" value="{{ old('address', $user->address) }}">
             @if ($errors->has('address'))
             <p class="error">{{ $errors->first('address') }}</p>
-            @endif
+            @enderror
         </div>
 
         <div class="form-group">
@@ -28,7 +28,7 @@
             <input type="text" id="building" name="building" value="{{ old('building', $user->building) }}">
             @if ($errors->has('building'))
             <p class="error">{{ $errors->first('building') }}</p>
-            @endif
+            @enderror
         </div>
 
         <button type="submit" class="btn-submit">更新する</button>

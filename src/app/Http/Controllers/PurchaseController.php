@@ -11,6 +11,7 @@ use App\Http\Requests\PurchaseRequest;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 use Illuminate\Support\Facades\Config;
+use App\Http\Requests\AddressRequest;
 
 class PurchaseController extends Controller
 {
@@ -58,7 +59,7 @@ class PurchaseController extends Controller
         return view('address.edit',compact('user', 'product'));
     }
 
-    public function updateAddress(Request $request, $item_id)
+    public function updateAddress(AddressRequest $request, $item_id)
     {
         $user = Auth::user();
         $user->zip = $request->zip;
