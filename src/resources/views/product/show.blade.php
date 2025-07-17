@@ -91,6 +91,11 @@ $stateLabels = [
                 @csrf
                 <label for="comment">商品へのコメント</label>
                 <textarea name="comment" id="comment" rows="4" placeholder="コメントを入力してください"></textarea>
+
+                @error('comment')
+                <p class="error">{{ $message }}</p>
+                @enderror
+
                 <button type="submit" class="btn-red">コメントを送信する</button>
             </form>
             @else
