@@ -3,10 +3,10 @@
 @section('content')
 @php
 $stateLabels = [
-1 => '良好',
-2 => '目立った傷や汚れ無し',
-3 => 'やや傷や汚れあり',
-4 => '状態が悪い',
+'new' => '良好',
+'good' => '目立った傷や汚れ無し',
+'fair' => 'やや傷や汚れあり',
+'poor' => '状態が悪い',
 ];
 @endphp
 <div class="product-detail-container">

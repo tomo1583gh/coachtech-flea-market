@@ -30,7 +30,7 @@ class Product extends Model
 
     protected $casts = [
         'is_sold' => 'boolean',
-        'state' => 'integer',
+        'state' => 'string',
     ];
 
 
