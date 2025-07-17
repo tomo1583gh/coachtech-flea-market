@@ -10,8 +10,8 @@
         <div class="form-group">
             <label for="zip">郵便番号</label>
             <input type="text" id="zip" name="zip" value="{{ old('zip', $user->zip) }}">
-            @if ($errors->has('zip'))
-            <p class="error">{{ $errors->first('zip') }}</p>
+            @error('zip')
+            <p class="error">{{ $message }}</p>
             @endif
         </div>
 
