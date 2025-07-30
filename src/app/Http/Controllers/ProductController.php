@@ -55,6 +55,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->state = $request->state;
+        $product->brand = $request->brand;
 
         // 画像の保存処理
         $imagePath = null;

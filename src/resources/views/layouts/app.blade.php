@@ -41,6 +41,8 @@
                 @guest
                 <a href="{{ route('login') }}">ログイン</a>
                 <a href="{{ route('register') }}">会員登録</a>
+                <a href="{{ route('mypage') }}">マイページ</a>
+                <a href="{{ route('sell') }}" class="btn-sell">出品</a>
                 @endguest
             </nav>
         </div>

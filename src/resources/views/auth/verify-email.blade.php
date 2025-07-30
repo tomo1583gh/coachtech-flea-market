@@ -7,7 +7,7 @@
         メール認証を完了してください。
     </p>
 
-    <a href="https://mail.google.com/" target="_blank" class="btn-gray">認証はこちらから</a>
+    <p target="_blank" class="btn-gray">認証はこちらから</p>
 
     @if (session('status') == 'verification-link-sent')
     <p class="success-message">確認メールを再送信しました。</p>

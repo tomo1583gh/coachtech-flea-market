@@ -53,6 +53,7 @@
         <div class="form-group">
             <label for="brand">ブランド名</label>
             <input type="text" name="brand" id="brand" value="{{ old('brand') }}">
+            @error('brand') <div class="error">{{ $message }}</div> @enderror
         </div>
 
         <div class="form-group">
