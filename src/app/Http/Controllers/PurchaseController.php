@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Http\Requests\AddressRequest;
+use App\Http\Requests\PurchaseRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Product;
-use App\Models\User;
-use App\Http\Requests\PurchaseRequest;
-use Stripe\Stripe;
 use Stripe\Checkout\Session;
-use Illuminate\Support\Facades\Config;
-use App\Http\Requests\AddressRequest;
+use Stripe\Stripe;
 
 class PurchaseController extends Controller
 {
@@ -23,12 +20,12 @@ class PurchaseController extends Controller
         // SOLD商品は購入ページに進めないようにする
         if ($product->is_sold) {
             return redirect()->route('product.show', ['item_id' => $item_id])
-                            ->with('error', 'この商品はすでに売り切れています。');
+                ->with('error', 'この商品はすでに売り切れています。');
         }
 
         $user = Auth::user();
 
-        return view('purchase',compact('product', 'user'));
+        return view('purchase', compact('product', 'user'));
     }
 
     // 購入処理
@@ -56,7 +53,7 @@ class PurchaseController extends Controller
         $user = Auth::user();
         $product = Product::findOrFail($item_id);
 
-        return view('address.edit',compact('user', 'product'));
+        return view('address.edit', compact('user', 'product'));
     }
 
     public function updateAddress(AddressRequest $request, $item_id)
@@ -103,7 +100,7 @@ class PurchaseController extends Controller
         $productId = session()->pull('purchase_product_id'); // セッションから取り出して削除
         $product = Product::find($productId);
 
-        if ($product && !$product->is_sold) {
+        if ($product && ! $product->is_sold) {
             $product->buyer_id = Auth::id();
             $product->is_sold = true;
             $product->save();

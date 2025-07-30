@@ -2,13 +2,12 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\Models\User;
-use App\Models\Product;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Product;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class DetailTest extends TestCase
 {
@@ -20,8 +19,11 @@ class DetailTest extends TestCase
     use RefreshDatabase;
 
     private $user;
+
     private $product;
+
     private $category1;
+
     private $category2;
 
     protected function setUp(): void

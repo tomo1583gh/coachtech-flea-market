@@ -24,7 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'zip',
         'address',
         'building',
-        'image_path'
+        'image_path',
     ];
 
     /**
@@ -63,9 +63,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isProfileComplete(): bool
     {
-        return !empty($this->name)
-            && !empty($this->zip)
-            && !empty($this->address)
-            && !empty($this->building);
+        return ! empty($this->name)
+            && ! empty($this->zip)
+            && ! empty($this->address)
+            && ! empty($this->building);
     }
 }

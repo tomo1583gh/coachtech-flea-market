@@ -2,11 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\Models\User;
 use App\Models\Product;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ShippingTest extends TestCase
 {
@@ -18,7 +17,9 @@ class ShippingTest extends TestCase
     use RefreshDatabase;
 
     private User $seller;
+
     private User $buyer;
+
     private Product $product;
 
     protected function setUp(): void

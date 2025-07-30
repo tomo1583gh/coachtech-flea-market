@@ -1,17 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\TopController;
-use App\Http\Controllers\MypageController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\MypageController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\RedirectController;
-
+use App\Http\Controllers\TopController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,19 +23,20 @@ use App\Http\Controllers\RedirectController;
 */
 
 // トップページ (商品一覧） ※ログイン不要
-Route::get('/', [TopController::class,'index'])->name('top');
+Route::get('/', [TopController::class, 'index'])->name('top');
 
 // 商品詳細画面 ※ログイン不要
-Route::get('/item/{item_id}', [ProductController::class,'show'])->name('product.show');
+Route::get('/item/{item_id}', [ProductController::class, 'show'])->name('product.show');
 
 // コメント
 Route::post('/item/{item_id}/comment', [CommentController::class, 'store'])
-->middleware('auth')
-->name('comment.store');
+    ->middleware('auth')
+    ->name('comment.store');
 
 // メール認証リンクからのアクセス処理
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill(); // 認証完了としてマークする
+
     return redirect('/mypage/profile'); // 認証後のリダイレクト先（プロフィール設定）
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
@@ -63,7 +62,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // 商品出品
     Route::get('/sell', [ProductController::class, 'create'])->name('sell');
-    Route::post('/sell', [ProductController::class,'store'])->name('product.store');
+    Route::post('/sell', [ProductController::class, 'store'])->name('product.store');
 
     // 商品購入 (追加)
     Route::get('/purchase/{item_id}', [PurchaseController::class, 'show'])->name('purchase.show');

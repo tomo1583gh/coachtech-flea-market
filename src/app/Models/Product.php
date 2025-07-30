@@ -4,9 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Category;
-use App\Models\Comment;
-
 
 class Product extends Model
 {
@@ -32,7 +29,6 @@ class Product extends Model
         'is_sold' => 'boolean',
         'state' => 'string',
     ];
-
 
     public function categories()
     {

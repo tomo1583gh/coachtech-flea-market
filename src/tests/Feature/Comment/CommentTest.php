@@ -2,12 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\Models\User;
 use App\Models\Product;
-use App\Models\Comment;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class CommentTest extends TestCase
 {
@@ -19,6 +17,7 @@ class CommentTest extends TestCase
     use RefreshDatabase;
 
     protected $user;
+
     protected $product;
 
     protected function setUp(): void
@@ -41,7 +40,7 @@ class CommentTest extends TestCase
     {
         // 【実行】
         $response = $this->actingAs($this->user)->post(route('comment.store', [
-            'item_id' => $this->product->id
+            'item_id' => $this->product->id,
         ]), [
             'comment' => 'これはテストコメントです。',
         ]);
@@ -66,7 +65,7 @@ class CommentTest extends TestCase
     public function ログイン前のユーザーはコメントを送信できない()
     {
         $response = $this->post(route('comment.store', [
-            'item_id' => $this->product->id
+            'item_id' => $this->product->id,
         ]), [
             'comment' => 'ゲストのコメント',
         ]);
@@ -84,7 +83,7 @@ class CommentTest extends TestCase
     public function コメントが入力されていない場合、バリデーションメッセージが表示される()
     {
         $response = $this->actingAs($this->user)->post(route('comment.store', [
-            'item_id' => $this->product->id
+            'item_id' => $this->product->id,
         ]), [
             'comment' => '',
         ]);
@@ -105,7 +104,7 @@ class CommentTest extends TestCase
         $longComment = str_repeat('あ', 256);
 
         $response = $this->actingAs($this->user)->post(route('comment.store', [
-            'item_id' => $this->product->id
+            'item_id' => $this->product->id,
         ]), [
             'comment' => $longComment,
         ]);

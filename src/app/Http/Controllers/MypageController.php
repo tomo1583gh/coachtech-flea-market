@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-// use PHPUnit\Framework\MockObject\ReturnValueNotConfiguredException;
 use App\Models\Product;
+// use PHPUnit\Framework\MockObject\ReturnValueNotConfiguredException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MypageController extends Controller

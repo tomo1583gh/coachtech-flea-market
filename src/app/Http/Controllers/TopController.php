@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
 
 class TopController extends Controller
 {
@@ -21,7 +18,7 @@ class TopController extends Controller
 
                 $products = Product::whereIn('id', $favoriteIds)
                     ->when($request->filled('keyword'), function ($query) use ($request) {
-                        $query->where('name', 'like', '%' . $request->keyword . '%');
+                        $query->where('name', 'like', '%'.$request->keyword.'%');
                     })
                     ->paginate(8);
             } else {
@@ -32,7 +29,7 @@ class TopController extends Controller
                 return $query->where('user_id', '!=', $userId);
             })
                 ->when($request->filled('keyword'), function ($query) use ($request) {
-                    $query->where('name', 'like', '%' . $request->keyword . '%');
+                    $query->where('name', 'like', '%'.$request->keyword.'%');
                 })
                 ->paginate(8);
         }

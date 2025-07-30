@@ -2,11 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\Models\User;
 use App\Models\Product;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class MyListTest extends TestCase
 {
@@ -18,6 +17,7 @@ class MyListTest extends TestCase
     use RefreshDatabase;
 
     private $user;
+
     private $otherUser;
 
     protected function setUp(): void
@@ -48,7 +48,7 @@ class MyListTest extends TestCase
     }
 
     /** @test */
-    public function 購入済み商品はSOLDと表示される()
+    public function 購入済み商品は_sol_dと表示される()
     {
         // 【準備】
         $sold = Product::factory()->create(['user_id' => $this->otherUser->id, 'is_sold' => true, 'name' => '購入済']);

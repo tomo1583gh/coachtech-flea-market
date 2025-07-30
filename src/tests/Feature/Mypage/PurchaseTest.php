@@ -2,11 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\Models\User;
 use App\Models\Product;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class PurchaseTest extends TestCase
 {
@@ -18,7 +17,9 @@ class PurchaseTest extends TestCase
     use RefreshDatabase;
 
     private $seller;
+
     private $buyer;
+
     private $product;
 
     protected function setUp(): void
@@ -47,7 +48,7 @@ class PurchaseTest extends TestCase
     {
         // 【実行】：ログインして購入処理
         $response = $this->actingAs($this->buyer)->post(route('purchase.complete', [
-            'item_id' => $this->product->id
+            'item_id' => $this->product->id,
         ]), [
             'payment_method' => 'card',
         ]);
@@ -64,11 +65,11 @@ class PurchaseTest extends TestCase
     }
 
     /** @test */
-    public function 購入した商品は商品一覧画面にてSOLDと表示される()
+    public function 購入した商品は商品一覧画面にて_sol_dと表示される()
     {
         // 【実行】：購入処理
         $this->actingAs($this->buyer)->post(route('purchase.complete', [
-            'item_id' => $this->product->id
+            'item_id' => $this->product->id,
         ]), [
             'payment_method' => 'convenience',
         ]);
@@ -85,7 +86,7 @@ class PurchaseTest extends TestCase
     {
         // 【実行】：購入処理
         $this->actingAs($this->buyer)->post(route('purchase.complete', [
-            'item_id' => $this->product->id
+            'item_id' => $this->product->id,
         ]), [
             'payment_method' => 'card',
         ]);

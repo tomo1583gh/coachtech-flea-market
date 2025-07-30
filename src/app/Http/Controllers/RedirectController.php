@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class RedirectController extends Controller
 {
@@ -14,7 +12,7 @@ class RedirectController extends Controller
         $user = Auth::user();
 
         // プロフィールが未設定（例：住所が空欄なら未設定とみなす）
-        if (!$user->isProfileComplete()) {
+        if (! $user->isProfileComplete()) {
             return redirect()->route('profile'); // プロフィール編集へ
         }
 

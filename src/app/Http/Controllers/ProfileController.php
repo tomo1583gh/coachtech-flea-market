@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
@@ -11,6 +9,7 @@ class ProfileController extends Controller
     public function edit()
     {
         $user = auth()->user();
+
         return view('profile', compact('user'));
     }
 

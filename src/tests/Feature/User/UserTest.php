@@ -2,14 +2,11 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
-use App\Models\User;
 use App\Models\Product;
-
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
 
 class UserTest extends TestCase
 {
@@ -21,6 +18,7 @@ class UserTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
+
     private User $seller;
 
     protected function setUp(): void

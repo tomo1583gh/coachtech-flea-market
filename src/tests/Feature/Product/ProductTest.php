@@ -2,11 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\Models\User;
 use App\Models\Product;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
@@ -45,12 +44,12 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function 購入済み商品はSOLDと表示される()
+    public function 購入済み商品は_sol_dと表示される()
     {
         // 【準備】購入済み商品を作成
         $soldProduct = Product::factory()->create([
             'is_sold' => true,
-            'name' => '売れた商品'
+            'name' => '売れた商品',
         ]);
 
         // 【実行】一覧画面にアクセス
@@ -66,12 +65,12 @@ class ProductTest extends TestCase
     {
         // 【準備】自分の商品と他人の商品を作成
         $otherProduct = Product::factory()->create([
-            'name' => '他人の商品'
+            'name' => '他人の商品',
         ]);
 
         $myProduct = Product::factory()->create([
             'user_id' => $this->user->id,
-            'name' => '自分の商品'
+            'name' => '自分の商品',
         ]);
 
         // 【実行】自分でログインして一覧にアクセス

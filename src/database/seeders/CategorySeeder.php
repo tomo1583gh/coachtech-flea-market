@@ -2,15 +2,13 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Category;
+use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run(): void
     {
@@ -29,7 +27,7 @@ class CategorySeeder extends Seeder
             'アクセサリー',
             'おもちゃ',
             'ベビー・キッズ',
-            '食品'
+            '食品',
         ];
 
         foreach ($categories as $name) {

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Product;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ExhibitionRequest;
 use App\Models\Category;
+use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -49,7 +48,7 @@ class ProductController extends Controller
     public function store(ExhibitionRequest $request)
     {
         // 商品登録
-        $product = new Product();
+        $product = new Product;
         $product->user_id = auth()->id();
         $product->name = $request->name;
         $product->description = $request->description;

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\CommentRequest;
 
 class CommentController extends Controller
 {
@@ -19,6 +17,6 @@ class CommentController extends Controller
         ]);
 
         return redirect()->route('product.show', ['item_id' => $item_id])
-                        ->with('status', 'コメントを投稿しました。');
+            ->with('status', 'コメントを投稿しました。');
     }
 }
